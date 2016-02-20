@@ -2,13 +2,17 @@
 
 // Declare app level module which depends on views, and components
 angular.module('SuggestionBox', [
+  'LocalStorageModule',
   'ngRoute',
+  'SuggestionBox.services',
   'SuggestionBox.view1',
   'SuggestionBox.view2',
   'SuggestionBox.home',
-  'SuggestionBox.posts',
+  'SuggestionBox.suggestion',
   'SuggestionBox.version'
 ]).
-config(['$routeProvider', function($routeProvider) {
-  $routeProvider.otherwise({redirectTo: '/view1'});
+config(['$routeProvider', 'localStorageServiceProvider',
+  function($routeProvider, localStorageServiceProvider) {
+    $routeProvider.otherwise({redirectTo: '/home'});
+    localStorageServiceProvider.setStorageType('localStorage');
 }]);
